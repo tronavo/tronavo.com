@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tronavo - Coming Soon</title>
+    <link rel="icon" type="image/png" href="images/tronavo-favicon.png">
     <style>
         * {
             margin: 0;
@@ -91,13 +92,207 @@
             60% { content: '..'; }
             80%, 100% { content: '...'; }
         }
+
+        /* Floating tech icons */
+        .tech-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .icon {
+            position: absolute;
+            color: rgba(30, 144, 255, 0.3);
+            font-size: 2rem;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .icon:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 15s;
+        }
+
+        .icon:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation-delay: 2s;
+            animation-duration: 18s;
+        }
+
+        .icon:nth-child(3) {
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 4s;
+            animation-duration: 20s;
+        }
+
+        .icon:nth-child(4) {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 1s;
+            animation-duration: 16s;
+        }
+
+        .icon:nth-child(5) {
+            top: 50%;
+            left: 5%;
+            animation-delay: 3s;
+            animation-duration: 17s;
+        }
+
+        .icon:nth-child(6) {
+            top: 60%;
+            right: 8%;
+            animation-delay: 5s;
+            animation-duration: 19s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-30px) rotate(5deg);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-60px) rotate(-5deg);
+                opacity: 0.3;
+            }
+            75% {
+                transform: translateY(-30px) rotate(3deg);
+                opacity: 0.4;
+            }
+        }
+
+        /* Circuit lines */
+        .circuit-line {
+            position: fixed;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(30, 144, 255, 0.5), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .circuit-line.horizontal {
+            width: 300px;
+            animation: slideHorizontal 8s linear infinite;
+        }
+
+        .circuit-line.vertical {
+            width: 1px;
+            height: 300px;
+            background: linear-gradient(180deg, transparent, rgba(30, 144, 255, 0.5), transparent);
+            animation: slideVertical 10s linear infinite;
+        }
+
+        .line1 {
+            top: 25%;
+            left: -300px;
+            animation-delay: 0s;
+        }
+
+        .line2 {
+            top: 75%;
+            left: -300px;
+            animation-delay: 4s;
+        }
+
+        .line3 {
+            left: 20%;
+            top: -300px;
+            animation-delay: 2s;
+        }
+
+        .line4 {
+            right: 25%;
+            top: -300px;
+            animation-delay: 6s;
+        }
+
+        @keyframes slideHorizontal {
+            0% { left: -300px; }
+            100% { left: 100%; }
+        }
+
+        @keyframes slideVertical {
+            0% { top: -300px; }
+            100% { top: 100%; }
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: rgba(30, 144, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle 15s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes particle {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100vw, 100vh);
+                opacity: 0;
+            }
+        }
+
+        .particle:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 30%; left: 15%; animation-delay: 3s; }
+        .particle:nth-child(3) { top: 50%; left: 25%; animation-delay: 6s; }
+        .particle:nth-child(4) { top: 70%; left: 10%; animation-delay: 9s; }
+        .particle:nth-child(5) { top: 20%; left: 30%; animation-delay: 12s; }
     </style>
 </head>
 <body>
+    <!-- Circuit lines -->
+    <div class="circuit-line horizontal line1"></div>
+    <div class="circuit-line horizontal line2"></div>
+    <div class="circuit-line vertical line3"></div>
+    <div class="circuit-line vertical line4"></div>
+
+    <!-- Particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Tech Icons -->
+    <div class="tech-icons">
+        <div class="icon">⟨/⟩</div>
+        <div class="icon">{ }</div>
+        <div class="icon">◇</div>
+        <div class="icon">⬡</div>
+        <div class="icon">▲</div>
+        <div class="icon">◈</div>
+    </div>
+
     <div class="grid"></div>
     <div class="container">
         <div class="logo">TRONAVO</div>
-        <div class="tagline">---</div>
+        <div class="tagline">AI Workflow Automation & Web Development</div>
         <div class="coming-soon">Coming Soon<span class="dots"></span></div>
     </div>
 </body>
