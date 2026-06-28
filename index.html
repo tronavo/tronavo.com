@@ -4,51 +4,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tronavo - Coming Soon</title>
+    <title>Tronavo — Coming Soon</title>
     <link rel="icon" type="image/png" href="images/Tronavo-Favicon.png">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
-
-    <style>
-
-    </style>
-
 </head>
 
 <body>
+
+    <div class="grid"></div>
+    <div class="vignette"></div>
+
     <!-- Circuit lines -->
     <div class="circuit-line horizontal line1"></div>
     <div class="circuit-line horizontal line2"></div>
     <div class="circuit-line vertical line3"></div>
     <div class="circuit-line vertical line4"></div>
 
-    <!-- Particles -->
+    <!-- Ambient particles -->
     <div class="particles">
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
+        <div class="particle"></div>
     </div>
 
-    <!-- Tech Icons -->
-    <div class="tech-icons">
-        <div class="icon">⟨/⟩</div>
-        <div class="icon">{ }</div>
-        <div class="icon">◇</div>
-        <div class="icon">⬡</div>
-        <div class="icon">▲</div>
-        <div class="icon">◈</div>
-    </div>
+    <main class="container">
 
-    <div class="grid"></div>
-    <div class="container">
-        <img src="images/Tronavo-Logo.png" alt="Tronavo Logo" class="logo-image" style="width: 100px; height: auto;"
-            class="logo-image">
-        <div class="logo">Tronavo</div>
-        <div class="tagline">---</div>
-        <div class="coming-soon">Coming Soon<span class="dots"></span></div>
-    </div>
+        <div class="status-line">
+            <span class="status-dot"></span>
+            <span class="status-text">SYSTEMS&nbsp;INITIALIZING</span>
+        </div>
+
+        <!-- Signature element: vortex rings -->
+        <div class="mark">
+            <div class="vortex-ring ring-outer"></div>
+            <div class="vortex-ring ring-mid"></div>
+            <div class="vortex-ring ring-inner"></div>
+            <!-- SVG -->
+            <img src="images/Tronavo-Logo.svg" alt="Tronavo" class="logo-image">
+        </div>
+
+        <h1 class="logo">Tronavo</h1>
+        <p class="tagline">Software automation, engineered from Nairobi&nbsp;outward</p>
+
+        <div class="coming-soon">
+            Coming Soon<span class="dots" aria-hidden="true"></span>
+        </div>
+
+        <div class="progress-track" role="img" aria-label="Build progress indicator">
+            <div class="progress-fill"></div>
+        </div>
+
+    </main>
+
 </body>
 
 </html>
