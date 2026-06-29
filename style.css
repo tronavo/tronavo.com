@@ -1,255 +1,329 @@
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* ============================================
+   Tronavo — Coming Soon
+   Palette: #0A0D14 (void) / #151B2C (panel) / #FF6A1A (signal) /
+            #FFB454 (amber) / #F4F1EA (paper) / #8B93A6 (slate)
+   Display: Space Grotesk · Body: Inter · Data: JetBrains Mono
+   ============================================ */
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a1128 0%, #1e3a5f 50%, #0d1b3a 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            overflow-y: auto;
-            position: relative;
-        }
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: 
-                linear-gradient(rgba(30, 144, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(30, 144, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-            pointer-events: none;
-        }
+:root {
+    --void: #0a0d14;
+    --panel: #151b2c;
+    --signal: #ff6a1a;
+    --signal-dim: rgba(255, 106, 26, 0.35);
+    --amber: #ffb454;
+    --paper: #f4f1ea;
+    --slate: #8b93a6;
+}
 
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 50px; }
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(ellipse 80% 60% at 50% 35%, #1b2238 0%, var(--void) 55%, #07090f 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    color: var(--paper);
+}
 
-        .container {
-            text-align: center;
-            z-index: 1;
-            padding: 2rem;
-        }
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
 
-        .logo {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 700;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: clamp(4px, 2vw, 8px);
-            margin-bottom: 1rem;
-            text-shadow: 0 0 20px rgba(30, 144, 255, 0.6);
-            animation: glow 2s ease-in-out infinite alternate;
-        }
+/* ---------- Grid + vignette ---------- */
 
-        @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(30, 144, 255, 0.6), 0 0 40px rgba(30, 144, 255, 0.4); }
-            to { text-shadow: 0 0 30px rgba(30, 144, 255, 0.8), 0 0 60px rgba(30, 144, 255, 0.6); }
-        }
+.grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 106, 26, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 106, 26, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    animation: gridMove 24s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
 
-        .tagline {
-            font-size: clamp(0.9rem, 3vw, 1.2rem);
-            color: #8bb4e7;
-            letter-spacing: clamp(1px, 0.5vw, 3px);
-            margin-bottom: 3rem;
-        }
+@keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 56px; }
+}
 
-        .coming-soon {
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
-            color: #fff;
-            font-weight: 300;
-            letter-spacing: clamp(2px, 1vw, 4px);
-        }
+.vignette {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 40%, var(--void) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
 
-        .dots {
-            display: inline-block;
-            animation: dots 1.5s steps(4, end) infinite;
-        }
+/* ---------- Container ---------- */
 
-        @keyframes dots {
-            0%, 20% { content: ''; }
-            40% { content: '.'; }
-            60% { content: '..'; }
-            80%, 100% { content: '...'; }
-        }
+.container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        /* Floating tech icons */
-        .tech-icons {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 0;
-        }
+/* ---------- Status eyebrow ---------- */
 
-        .icon {
-            position: absolute;
-            color: rgba(30, 144, 255, 0.3);
-            font-size: 2rem;
-            animation: float 20s infinite ease-in-out;
-        }
+.status-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.65rem, 1.6vw, 0.8rem);
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    margin-bottom: 2.5rem;
+    padding: 0.45rem 1rem;
+    border: 1px solid rgba(255, 180, 84, 0.25);
+    border-radius: 999px;
+    background: rgba(255, 106, 26, 0.05);
+}
 
-        .icon:nth-child(1) {
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-            animation-duration: 15s;
-        }
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 8px 2px var(--signal-dim);
+    animation: pulse 1.8s ease-in-out infinite;
+}
 
-        .icon:nth-child(2) {
-            top: 20%;
-            right: 15%;
-            animation-delay: 2s;
-            animation-duration: 18s;
-        }
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+}
 
-        .icon:nth-child(3) {
-            bottom: 15%;
-            left: 15%;
-            animation-delay: 4s;
-            animation-duration: 20s;
-        }
+/* ---------- Signature element: the mark ---------- */
 
-        .icon:nth-child(4) {
-            bottom: 20%;
-            right: 10%;
-            animation-delay: 1s;
-            animation-duration: 16s;
-        }
+.mark {
+    position: relative;
+    width: clamp(180px, 32vw, 260px);
+    height: clamp(180px, 32vw, 260px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
 
-        .icon:nth-child(5) {
-            top: 50%;
-            left: 5%;
-            animation-delay: 3s;
-            animation-duration: 17s;
-        }
+.logo-image {
+    position: relative;
+    z-index: 3;
+    width: 40%;
+    height: auto;
+    filter: drop-shadow(0 0 18px rgba(255, 106, 26, 0.5));
+}
 
-        .icon:nth-child(6) {
-            top: 60%;
-            right: 8%;
-            animation-delay: 5s;
-            animation-duration: 19s;
-        }
+.vortex-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid transparent;
+}
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translateY(-30px) rotate(5deg);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translateY(-60px) rotate(-5deg);
-                opacity: 0.3;
-            }
-            75% {
-                transform: translateY(-30px) rotate(3deg);
-                opacity: 0.4;
-            }
-        }
+/* Each ring is a conic-gradient arc that spins */
+.ring-outer {
+    inset: 0;
+    background: conic-gradient(from 0deg, transparent 0%, var(--signal-dim) 15%, transparent 35%, transparent 60%, rgba(255,180,84,0.3) 75%, transparent 95%);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+    animation: spin 14s linear infinite;
+}
 
-        /* Circuit lines */
-        .circuit-line {
-            position: fixed;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(30, 144, 255, 0.5), transparent);
-            pointer-events: none;
-            z-index: 0;
-        }
+.ring-mid {
+    inset: 16%;
+    background: conic-gradient(from 90deg, transparent 0%, rgba(255,180,84,0.5) 10%, transparent 30%, transparent 65%, var(--signal-dim) 80%, transparent 100%);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+    animation: spin 9s linear infinite reverse;
+}
 
-        .circuit-line.horizontal {
-            width: 300px;
-            animation: slideHorizontal 8s linear infinite;
-        }
+.ring-inner {
+    inset: 32%;
+    background: conic-gradient(from 200deg, transparent 0%, var(--signal) 8%, transparent 25%);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+    animation: spin 6s linear infinite;
+    filter: drop-shadow(0 0 6px var(--signal));
+}
 
-        .circuit-line.vertical {
-            width: 1px;
-            height: 300px;
-            background: linear-gradient(180deg, transparent, rgba(30, 144, 255, 0.5), transparent);
-            animation: slideVertical 10s linear infinite;
-        }
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
-        .line1 {
-            top: 25%;
-            left: -300px;
-            animation-delay: 0s;
-        }
+/* ---------- Wordmark + copy ---------- */
 
-        .line2 {
-            top: 75%;
-            left: -300px;
-            animation-delay: 4s;
-        }
+.logo {
+    font-family: 'Audiowide', 'Space Grotesk', sans-serif;
+    font-size: clamp(2.2rem, 6.6vw, 3.4rem);
+    font-weight: 400;
+    color: var(--paper);
+    letter-spacing: clamp(1px, 0.6vw, 3px);
+    margin-bottom: 0.85rem;
+    text-shadow: 0 0 24px rgba(255, 106, 26, 0.45);
+}
 
-        .line3 {
-            left: 20%;
-            top: -300px;
-            animation-delay: 2s;
-        }
+.logo-soft {
+    color: var(--amber);
+    opacity: 0.92;
+}
 
-        .line4 {
-            right: 25%;
-            top: -300px;
-            animation-delay: 6s;
-        }
+.tagline {
+    font-size: clamp(0.85rem, 2.4vw, 1.05rem);
+    color: var(--slate);
+    letter-spacing: 0.04em;
+    margin-bottom: 3rem;
+    max-width: 32ch;
+}
 
-        @keyframes slideHorizontal {
-            0% { left: -300px; }
-            100% { left: 100%; }
-        }
+.coming-soon {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.3rem, 4.2vw, 2rem);
+    color: var(--paper);
+    font-weight: 500;
+    letter-spacing: clamp(1px, 0.6vw, 3px);
+    margin-bottom: 1.6rem;
+}
 
-        @keyframes slideVertical {
-            0% { top: -300px; }
-            100% { top: 100%; }
-        }
+.dots::after {
+    content: '';
+    display: inline-block;
+    width: 1.4em;
+    text-align: left;
+    animation: dots 1.6s steps(4, end) infinite;
+}
 
-        /* Particles */
-        .particle {
-            position: fixed;
-            width: 3px;
-            height: 3px;
-            background: rgba(30, 144, 255, 0.6);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: particle 15s linear infinite;
-            z-index: 0;
-        }
+@keyframes dots {
+    0% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+    100% { content: ''; }
+}
 
-        @keyframes particle {
-            0% {
-                transform: translate(0, 0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translate(100vw, 100vh);
-                opacity: 0;
-            }
-        }
+/* ---------- Progress indicator ---------- */
+/* Thematic choice for an automation company: not a generic loading bar,
+   but a "build" line — finite-feeling rather than an endless shimmer. */
 
-        .particle:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-        .particle:nth-child(2) { top: 30%; left: 15%; animation-delay: 3s; }
-        .particle:nth-child(3) { top: 50%; left: 25%; animation-delay: 6s; }
-        .particle:nth-child(4) { top: 70%; left: 10%; animation-delay: 9s; }
-        .particle:nth-child(5) { top: 20%; left: 30%; animation-delay: 12s; }
+.progress-track {
+    width: clamp(160px, 30vw, 220px);
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, var(--signal), var(--amber));
+    border-radius: 999px;
+    animation: build 3.2s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--signal-dim);
+}
+
+@keyframes build {
+    0% { width: 8%; margin-left: 0%; }
+    45% { width: 60%; margin-left: 5%; }
+    100% { width: 8%; margin-left: 92%; }
+}
+
+/* ---------- Circuit lines ---------- */
+
+.circuit-line {
+    position: fixed;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--signal-dim), transparent);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.circuit-line.horizontal {
+    width: 320px;
+    animation: slideHorizontal 9s linear infinite;
+}
+
+.circuit-line.vertical {
+    width: 1px;
+    height: 320px;
+    background: linear-gradient(180deg, transparent, var(--signal-dim), transparent);
+    animation: slideVertical 11s linear infinite;
+}
+
+.line1 { top: 22%; left: -320px; animation-delay: 0s; }
+.line2 { top: 78%; left: -320px; animation-delay: 4.5s; }
+.line3 { left: 18%; top: -320px; animation-delay: 2s; }
+.line4 { right: 22%; top: -320px; animation-delay: 6.5s; }
+
+@keyframes slideHorizontal {
+    0% { left: -320px; }
+    100% { left: 100%; }
+}
+
+@keyframes slideVertical {
+    0% { top: -320px; }
+    100% { top: 100%; }
+}
+
+/* ---------- Ambient particles ---------- */
+
+.particle {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    background: var(--amber);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particle 16s linear infinite;
+    z-index: 0;
+    box-shadow: 0 0 4px rgba(255, 180, 84, 0.7);
+}
+
+@keyframes particle {
+    0% { transform: translate(0, 0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translate(90vw, 95vh); opacity: 0; }
+}
+
+.particle:nth-child(1) { top: 8%; left: 4%; animation-delay: 0s; }
+.particle:nth-child(2) { top: 28%; left: 14%; animation-delay: 3s; }
+.particle:nth-child(3) { top: 48%; left: 24%; animation-delay: 6s; }
+.particle:nth-child(4) { top: 68%; left: 9%; animation-delay: 9s; }
+.particle:nth-child(5) { top: 18%; left: 32%; animation-delay: 12s; }
+.particle:nth-child(6) { top: 60%; left: 36%; animation-delay: 14s; }
+
+/* ---------- Focus visibility (a11y floor) ---------- */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 420px) {
+    .status-text { letter-spacing: 0.1em; }
+    .tagline { max-width: 26ch; }
+}
