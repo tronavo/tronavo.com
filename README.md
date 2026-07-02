@@ -17,4 +17,4 @@ We're launching something exceptional. Stay tuned.
 
 ---
 
-© 2025 Tronavo. All rights reserved.
+© 2026 Tronavo. All rights reserved.
